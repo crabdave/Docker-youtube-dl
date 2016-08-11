@@ -1,11 +1,12 @@
-
-
-
-#!/bin/sh
-echo "please input the youtube play list url for download!"
-read input_variable
-#echo "You entered: $input_variable"
-
-docker run -d -e "container=container-youtube-dl" --name container-youtube-dl -h container-youtube-dl -v /data/docker/youtube:/data/docker/youtube youtube-dl "$input_variable"
-
-docker logs -f container-youtube-dl
+#!/bin/bash
+echo "start downloading"
+while read line
+do
+	echo "the downloading dir is /data/docker/youtube , downloading URL is:$line"
+	cd /data/docker/youtube
+	echo "the number of downloading files is:" `ls -l |grep "^-"|wc -l` 
+	echo "start downloading from youtube"
+	youtube-dl -cit $line
+	echo "wait 30 minutes for next downloading"
+	sleep 1800s
+done < /root/playlist
