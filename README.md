@@ -20,7 +20,7 @@ docker build -t youtube-dl .
 docker run -d -e "container=container-youtube-dl" --name container-youtube-dl -h container-youtube-dl -v /data/docker/youtube:/data/docker/youtube youtube-dl
 
 #check logs
-docker logs --tail 0 -f container-youtube-dl
+docker logs --tail 100 -f container-youtube-dl
 
 #end
 Enjoy it!
